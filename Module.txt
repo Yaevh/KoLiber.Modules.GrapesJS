@@ -1,0 +1,10 @@
+Name: KoLiber.Modules.GrapesJS
+AntiForgery: enabled
+Author: Tomasz Malinowski
+Website: http://koliber.org
+Version: 0.0.1
+OrchardVersion: 2.0.x
+Description: Enables GrapesJS WYSIWYG editor for Body content part.
+FeatureDescription: GrapesJS editor.
+Dependencies: OrchardCore.Body
+Category: Content Management

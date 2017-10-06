@@ -1,0 +1,17 @@
+@using OrchardCore.Body.ViewModels;
+@model BodyPartViewModel
+
+<script asp-name="grapes" depends-on="admin" asp-src="/KoLiber.Modules.GrapesJS/Scripts/grapes.min.js" debug-src="/KoLiber.Modules.GrapesJS/Scripts/grapes.js" at="Foot"></script>
+<style asp-name="grapes" asp-src="/KoLiber.Modules.GrapesJS/Styles/grapes.min.css" debug-src="/KoLiber.Modules.GrapesJS/Styles/grapes.css"></style>
+
+<fieldset class="form-group">
+    <label asp-for="Body">@T["Body"]</label>
+    <textarea asp-for="Body" class="form-control"></textarea>
+    <span class="hint">@T["The body of the content item."]</span>
+</fieldset>
+
+<script at="Foot">
+    var editor = grapesjs.init({
+        container : '#@Html.IdFor(m => m.Body)'
+    });
+</script>

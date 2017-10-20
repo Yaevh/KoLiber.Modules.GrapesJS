@@ -1,17 +1,35 @@
 @using OrchardCore.Body.ViewModels;
 @model BodyPartViewModel
 
-<script asp-name="grapes" depends-on="admin" asp-src="/KoLiber.Modules.GrapesJS/Scripts/grapes.min.js" debug-src="/KoLiber.Modules.GrapesJS/Scripts/grapes.js" at="Foot"></script>
-<style asp-name="grapes" asp-src="/KoLiber.Modules.GrapesJS/Styles/grapes.min.css" debug-src="/KoLiber.Modules.GrapesJS/Styles/grapes.css"></style>
+<script asp-name="grapesjs" depends-on="jquery" asp-src="/KoLiber.Modules.GrapesJS/Scripts/grapes.min.js" debug-src="/KoLiber.Modules.GrapesJS/Scripts/grapes.min.js" at="Foot"></script>
+<style asp-name="grapesjs" asp-src="/KoLiber.Modules.GrapesJS/Styles/grapes.min.css" debug-src="/KoLiber.Modules.GrapesJS/Styles/grapes.min.css"></style>
 
 <fieldset class="form-group">
     <label asp-for="Body">@T["Body"]</label>
-    <textarea asp-for="Body" class="form-control"></textarea>
+    <input asp-for="Body" id="@Html.IdFor(m => m.Body)" type="hidden" class="form-control" />
+
+    <div id="@Html.IdFor(m => m.Body)-editor">
+        @Html.Raw(@Model.Body)
+    </div>
+    
     <span class="hint">@T["The body of the content item."]</span>
 </fieldset>
 
 <script at="Foot">
     var editor = grapesjs.init({
-        container : '#@Html.IdFor(m => m.Body)'
+        container: '#@Html.IdFor(m => m.Body)-editor',
+        fromElement: true,
+        plugins: [
+        ],
+        storageManager: {
+            autosave: false,
+            type: '',
+        }
+    });
+
+    // send editor content on submit
+    $('#@Html.IdFor(m => m.Body)').closest("form").submit(function () {
+        var body = editor.getHtml();
+        $('#@Html.IdFor(m => m.Body)').val(body);
     });
 </script>
